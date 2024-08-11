@@ -1,0 +1,20 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col" class="team-col">Team</th>
+        <th *ngFor="let team of teams[0]" scope="col" class="week">
+          W{{ team.week }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let team of teams">
+        <td>
+          {{ pointsService.truncateTeamName(team[0].teamName) }}
+        </td>
+        <td *ngFor="let rec of team" class="week">{{ rec.weekRank }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

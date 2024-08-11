@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col" class="col-a">Rank</th>
+        <th scope="col" class="col-c">Team</th>
+        <th scope="col" class="col-b">Points</th>
+        <th scope="col" class="col-a">W</th>
+        <th scope="col" class="col-a">L</th>
+        <th scope="col" class="col-a">T</th>
+        <th scope="col" class="col-b">Hit</th>
+        <th scope="col" class="col-b">Pit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let team of teams">
+        <th scope="row" class="col-a">{{ team.weekRank }}</th>
+        <td class="col-c">
+          {{ pointsService.truncateTeamName(team.teamName) }}
+        </td>
+        <td class="col-b">
+          {{ (team.points | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-a">{{ team.wins }}</td>
+        <td class="col-a">{{ team.losses }}</td>
+        <td class="col-a">{{ team.ties }}</td>
+        <td class="col-b">
+          {{ (team.hitting | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-b">
+          {{ (team.pitching | number : "1.2-2")?.replace(",", "") }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

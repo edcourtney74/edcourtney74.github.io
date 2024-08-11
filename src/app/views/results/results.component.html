@@ -1,0 +1,13 @@
+<div
+  *ngIf="allWeeksTeams.length === 0"
+  class="d-flex justify-content-center mt-3"
+>
+  <div class="spinner-border" role="status"></div>
+</div>
+<div *ngIf="allWeeksTeams.length > 0">
+  <app-week-selector
+    [weeks]="allWeeks"
+    (sendWeek)="setWeek($event)"
+  ></app-week-selector>
+  <app-results-grid [teams]="selectedWeekTeams"></app-results-grid>
+</div>

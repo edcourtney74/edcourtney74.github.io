@@ -1,0 +1,100 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col" class="col-a sortable" (click)="sort('rank')">Rank</th>
+        <th scope="col" class="col-c">Team</th>
+        <th scope="col" class="col-a sortable" (click)="sort('wins')">W</th>
+        <th scope="col" class="col-a sortable" (click)="sort('losses')">L</th>
+        <th scope="col" class="col-a sortable" (click)="sort('ties')">T</th>
+        <th scope="col" class="col-b sortable" (click)="sort('points')">Pts</th>
+        <th scope="col" class="col-b sortable" (click)="sort('gamesBack')">
+          GB
+        </th>
+        <th scope="col" class="col-b sortable" (click)="sort('hitting')">
+          Hit
+        </th>
+        <th scope="col" class="col-b sortable" (click)="sort('pitching')">
+          Pit
+        </th>
+        <th scope="col" class="col-a">
+          <fa-icon
+            [icon]="faTrophy"
+            size="sm"
+            class="sortable"
+            (click)="sort('topTeams')"
+          ></fa-icon>
+        </th>
+        <th scope="col" class="col-a">
+          <fa-icon
+            [icon]="faBomb"
+            class="sortable"
+            size="sm"
+            (click)="sort('bombs')"
+          ></fa-icon>
+        </th>
+        <th scope="col" class="col-b sortable" (click)="sort('averageWins')">
+          AW
+        </th>
+        <th scope="col" class="col-b sortable" (click)="sort('averageLosses')">
+          AL
+        </th>
+        <th scope="col" class="col-b sortable" (click)="sort('stDev')">
+          StDev
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let team of standings">
+        <td scope="row" class="col-a">
+          <span *ngIf="clinchedTeamIds.includes(team.teamId)">*</span>
+          <span *ngIf="knockedOutTeamIds.includes(team.teamId)">x</span
+          >{{ team.rank }}
+        </td>
+        <td class="col-c">
+          {{ pointsService.truncateTeamName(team.teamName) }}
+        </td>
+        <td class="col-a">{{ team.wins }}</td>
+        <td class="col-a">{{ team.losses }}</td>
+        <td class="col-a">{{ team.ties }}</td>
+        <td class="col-b">
+          {{ (team.points | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-b">
+          {{
+            team.gamesBack === 0
+              ? "-"
+              : team.gamesBack > 0
+              ? "+" + (team.gamesBack | number : "1.2-2")?.replace(",", "")
+              : (team.gamesBack | number : "1.2-2")?.replace(",", "")
+          }}
+        </td>
+        <td class="col-b">
+          {{ (team.hitting | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-b">
+          {{ (team.pitching | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-a">{{ team.topTeams }}</td>
+        <td class="col-a">{{ team.bombs }}</td>
+        <td class="col-b">
+          {{ (team.averageWins | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-b">
+          {{ (team.averageLosses | number : "1.2-2")?.replace(",", "") }}
+        </td>
+        <td class="col-b">
+          {{ (team.stDev | number : "1.2-2")?.replace(",", "") }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <small *ngIf="clinchedTeamIds.length > 0">* - clinched playoff spot</small>
+</div>
+<div>
+  <small *ngIf="knockedOutTeamIds.length > 0"
+    >x - can't qualify for playoff spot</small
+  >
+</div>

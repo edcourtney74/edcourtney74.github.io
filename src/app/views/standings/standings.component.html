@@ -1,0 +1,20 @@
+<div *ngIf="standings.length === 0" class="d-flex justify-content-center mt-3">
+  <div class="spinner-border" role="status"></div>
+</div>
+<div *ngIf="standings.length > 0">
+  <ul ngbNav #nav="ngbNav" class="nav-tabs" (navChange)="onNavChange($event)">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Current</a>
+      <ng-template ngbNavContent>
+        <app-standings-grid [standings]="standings"></app-standings-grid>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Projected</a>
+      <ng-template ngbNavContent>
+        <app-standings-grid [standings]="standings"></app-standings-grid>
+      </ng-template>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
